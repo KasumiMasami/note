@@ -10,10 +10,10 @@ set hive.input.format=org.apache.hadoop.hive.ql.io.CombineHiveInputFormat; -- �
 ```
 - 输出结果合并：
 ```sql
-set hive.merge.mapfiles=true -- 在map-only job后合并文件
-set hive.merge.mapredfiles=true -- 在map-reduce job后合并文件
-set hive.merge.size.per.task=1024000000 -- 合并后每个文件的大小，1G
-set hive.merge.smallfiles.avgsize=1024000000 -- 输出文件的平均文件大小，是决定是否执行合并操作的阈值，1G
+set hive.merge.mapfiles=true; -- 在map-only job后合并文件
+set hive.merge.mapredfiles=true; -- 在map-reduce job后合并文件
+set hive.merge.size.per.task=1024000000; -- 合并后每个文件的大小，1G
+set hive.merge.smallfiles.avgsize=1024000000; -- 输出文件的平均文件大小，是决定是否执行合并操作的阈值，1G
 ```
 ps: 如果通过SparkSQL访问Hive，可以直接通过reparation后persist来减少输出的小文件
 
