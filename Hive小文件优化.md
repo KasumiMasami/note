@@ -15,3 +15,14 @@ set hive.merge.mapredfiles=true -- 在map-reduce job后合并文件
 set hive.merge.size.per.task=1024000000 -- 合并后每个文件的大小，1G
 set hive.merge.smallfiles.avgsize=1024000000 -- 输出文件的平均文件大小，是决定是否执行合并操作的阈值，1G
 ```
+ps: 如果通过SparkSQL访问Hive，可以直接通过reparation后persist来减少输出的小文件
+
+- 插入分区的操作加上distribute by rand()
+可以使用distribute by rand() 将数据随机分配给Reduce，避免出现有的文件特别大, 有的文件特别小。
+```sql
+    insert overwrite table table_name partition(dt)
+    select * from other_table_name distribute by rand();
+```
+
+- 修改表存储格式
+使用Sequencefile作为表存储格式，不要用textfile，可以在一定程度上减少小文件。
