@@ -20,8 +20,8 @@ ps: 如果通过SparkSQL访问Hive，可以直接通过reparation后persist来�
 - 插入分区的操作加上distribute by rand()
 可以使用distribute by rand() 将数据随机分配给Reduce，避免出现有的文件特别大, 有的文件特别小。
 ```sql
-    insert overwrite table table_name partition(dt)
-    select * from other_table_name distribute by rand();
+insert overwrite table table_name partition(dt)
+select * from other_table_name distribute by rand();
 ```
 
 - 修改表存储格式
